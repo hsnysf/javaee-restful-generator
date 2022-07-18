@@ -376,7 +376,9 @@
 					#[[$scope]]#.${table.propertyName}Search.pageCount = 0;
 					#[[$scope]]#.${table.propertyName}Search.totalRows = 0;
 					#foreach(${relationColumn} in ${table.importedKeys})
+					#if(!${relationColumn.primaryKey})
 					#[[$scope]]#.${table.propertyName}Search.${relationColumn.relationPropertyName} = new Object();
+					#end
 					#end
 					
 					#[[$scope]]#.${table.propertyName} = new Object();
@@ -384,7 +386,9 @@
 					#[[$scope]]#.${table.propertyName}.${relationColumn.relationPropertyName} = new Object();
 					#end
 					#foreach(${relationColumn} in ${table.exportedKeys})
+					#if(!${relationColumn.primaryKey})
 					#[[$scope]]#.${table.propertyName}.${relationColumn.table.propertyName}s = new Array();
+					#end
 					#end
 					
 					#[[$scope]]#.search${table.className}s = function(alert){
