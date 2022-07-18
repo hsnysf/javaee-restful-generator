@@ -470,7 +470,9 @@
 						
 						#[[$scope]]#.${table.propertyName} = new Object();
 						#foreach(${relationColumn} in ${table.importedKeys})
+						#if(!${relationColumn.primaryKey})
 						#[[$scope]]#.${table.propertyName}.${relationColumn.relationPropertyName} = new Object();
+						#end
 						#end
 						#foreach(${relationColumn} in ${table.exportedKeys})
 						#[[$scope]]#.${table.propertyName}.${relationColumn.table.propertyName}s = new Array();
