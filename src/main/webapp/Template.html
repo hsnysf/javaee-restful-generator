@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	
+		<title>${table.title} Management</title>
+		
+		<meta http-equiv="Expires" content="-1">
+		<meta http-equiv="Pragma" content="no-cache">
+		<meta http-equiv="Cache-Control" content="no-cache">
+
+		<meta charset="UTF-8">
+		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+		
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="viewport" content="width = device-width, initial-scale = 1, user-scalable = no">
+
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+		
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+		<link href="common.css" rel="stylesheet">
+		
+	    <link rel="shortcut icon" href="https://upload.wikimedia.org/wikipedia/en/thumb/3/30/Java_programming_language_logo.svg/800px-Java_programming_language_logo.svg.png">
+		<link rel="apple-touch-icon" href="https://upload.wikimedia.org/wikipedia/en/thumb/3/30/Java_programming_language_logo.svg/800px-Java_programming_language_logo.svg.png">
+		<link rel="apple-touch-startup-image" href="https://upload.wikimedia.org/wikipedia/en/thumb/3/30/Java_programming_language_logo.svg/800px-Java_programming_language_logo.svg.png">
+		<link rel="apple-touch-icon-precomposed" href="https://upload.wikimedia.org/wikipedia/en/thumb/3/30/Java_programming_language_logo.svg/800px-Java_programming_language_logo.svg.png">
+	
+	</head>
+	<body>
+		<div class="container-fluid" ng-app="application" ng-controller="controller">
+		
+			<h4 class="pb-2 mt-4 mb-3 border-bottom">
+				${table.title} Management
+			</h4>
+			
+			<div id="alert" ng-class="alert.class" ng-bind="alert.message" class="alert fw-bold text-center" role="alert">
+			</div>
+			
+			<div class="card">
+				<div class="card-header fw-bold">
+					${table.title} Search
+				</div>
+				<div class="card-body">
+					<div class="row">
+						#foreach(${nestedColumn} in ${table.nestedColumns})
+						#if(${nestedColumn.type} == -7 || ${nestedColumn.type} == 16)
+						<div class="col-sm-12 col-md-6 col-lg-4">
+							<div class="mb-3">
+								<label for="${nestedColumn.table.propertyName}${nestedColumn.methodName}Search" class="form-label">${nestedColumn.title}</label>
+								<select id="${nestedColumn.table.propertyName}${nestedColumn.methodName}Search" ng-model="${table.propertyName}Search.${nestedColumn.fieldModel}" class="${nestedColumn.inputSearchClass}" placeholder="${nestedColumn.title}" autocomplete="off">
+									<option ng-value="">${nestedColumn.title}</option>
+									<option ng-value="true">Yes</option>
+									<option ng-value="false">No</option>
+								</select>
+							</div>
+						</div>
+						#elseif(!${nestedColumn.activeOrDateOrUser})
+						<div class="col-sm-12 col-md-6 col-lg-4">
+							<div class="mb-3">
+								<label for="${nestedColumn.table.propertyName}${nestedColumn.methodName}Search" class="form-label">${nestedColumn.title}</label>
+								<input id="${nestedColumn.table.propertyName}${nestedColumn.methodName}Search" ng-model="${table.propertyName}Search.${nestedColumn.fieldModel}" type="${nestedColumn.inputType}" class="${nestedColumn.inputSearchClass}" placeholder="${nestedColumn.title}" maxlength="${nestedColumn.length}" autocomplete="off">
+							</div>
+						</div>
+						#end
+						#end
+					</div>
+				</div>
+				<div class="card-footer text-center" ng-hide="loading">
+					<button type="button" class="btn btn-dark" ng-click="search${table.className}s(true)">Search</button>
+				</div>
+			</div>
+			
+			<div class="card mt-4">
+				<div class="card-header fw-bold">
+					${table.title} List
+				</div>
+				<div class="table-responsive">
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th>
+									#
+								</th>
+								#foreach(${nestedColumn} in ${table.nestedColumns})
+								#if(!${nestedColumn.activeOrDateOrUser} || ${nestedColumn.table.name} == ${table.name})
+								<th>
+									${nestedColumn.title}
+								</th>
+								#end
+								#end
+								<th>
+									<button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#${table.propertyName}Modal" ng-click="toAdd${table.className}()">Add</button>
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="${table.propertyName} in ${table.propertyName}s" ng-hide="loading">
+								<td>
+									{{$index + 1}}
+								</td>
+								#foreach(${nestedColumn} in ${table.nestedColumns})
+								#if(!${nestedColumn.activeOrDateOrUser} || ${nestedColumn.table.name} == ${table.name})
+								<td>
+									#if(${nestedColumn.type} == -7 || ${nestedColumn.type} == 16)
+									{{${table.propertyName}.${nestedColumn.fieldModel} ? 'Yes' : 'No'}}
+									#else
+									{{${table.propertyName}.${nestedColumn.fieldModel}}}
+									#end
+								</td>
+								#end
+								#end
+								<th>
+									<button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#viewModal" ng-click="select${table.className}(${table.propertyName})">View</button>
+									<button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#${table.propertyName}Modal" ng-click="toUpdate${table.className}(${table.propertyName})">Edit</button>
+									<button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#activateModal" ng-if="!${table.propertyName}.active" ng-click="select${table.className}(${table.propertyName})">Activate</button>
+									<button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#activateModal" ng-if="${table.propertyName}.active" ng-click="select${table.className}(${table.propertyName})">Deactivate</button>
+								</th>
+							</tr>
+							<tr ng-show="loading">
+								<td align="center" colspan="100">
+									<div class="spinner-border" role="status">
+										<span class="sr-only"></span>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="card-footer" ng-if="${table.propertyName}Search.totalRows != 0">
+					<div class="row">
+						<div class="col-3 text-start">
+							<button type="button" class="btn btn-dark" ng-if="${table.propertyName}Search.pageNo != 1" ng-click="first()">First</button>
+							<button type="button" class="btn btn-dark" ng-if="${table.propertyName}Search.pageNo != 1" ng-click="previous()">Previous</button>
+						</div>
+						<div class="col-2 text-center">
+							<label class="fw-bold">
+								Rows :
+								<select ng-model="${table.propertyName}Search.rowCount" class="form-control d-inline w-auto" ng-change="first()">
+									<option ng-value="5">5</option>
+									<option ng-value="10">10</option>
+									<option ng-value="15">15</option>
+									<option ng-value="20">20</option>
+								</select>
+							</label>
+						</div>
+						<div class="col-2 text-center">
+							<label class="fw-bold pt-1">
+								Total : {{${table.propertyName}Search.totalRows}}
+							</label>
+						</div>
+						<div class="col-2 text-center">
+							<label class="fw-bold pt-1">
+								Page {{${table.propertyName}Search.pageNo}} of {{${table.propertyName}Search.pageCount}}
+							</label>
+						</div>
+						<div class="col-3 text-end">
+							<button type="button" class="btn btn-dark" ng-if="${table.propertyName}Search.pageNo != ${table.propertyName}Search.pageCount" ng-click="next()">Next</button>
+							<button type="button" class="btn btn-dark" ng-if="${table.propertyName}Search.pageNo != ${table.propertyName}Search.pageCount" ng-click="last()">Last</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<br>
+			<br>
+			<div class="modal fade" id="${table.propertyName}Modal">
+				<div class="modal-dialog modal-xl">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title">{{${table.propertyName}.id == null ? 'Add' : 'Update'}} ${table.title}</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<div id="alert" ng-class="alert.class" ng-bind="alert.message" class="alert fw-bold text-center" role="alert">
+							</div>
+							<div class="card mt-4">
+								<div class="card-header fw-bold">
+									${table.title} Details
+								</div>
+								<div class="card-body">
+									<div class="row">
+										#foreach(${nestedColumn} in ${table.nestedColumns})
+										#if(${nestedColumn.propertyName} != "id" && !${nestedColumn.activeOrDateOrUser})
+										<div class="col-sm-12 col-md-6 col-lg-4">
+											<div class="mb-3">
+												<label for="${nestedColumn.table.propertyName}${nestedColumn.methodName}" class="form-label">${nestedColumn.title}</label>
+												<input id="${nestedColumn.table.propertyName}${nestedColumn.methodName}" ng-model="${table.propertyName}.${nestedColumn.fieldModel}" type="${nestedColumn.inputType}" class="${nestedColumn.inputClass}" placeholder="${nestedColumn.title}" maxlength="${nestedColumn.length}" autocomplete="off">
+											</div>
+										</div>
+										#end
+										#end
+									</div>
+								</div>
+							</div>
+							#foreach(${relationColumn} in ${table.exportedKeys})
+							<div class="card mt-4">
+								<div class="card-header fw-bold">
+									${relationColumn.table.title} List
+								</div>
+								<div class="table-responsive">
+									<table class="table table-striped">
+										<thead>
+											<tr>
+												<th>
+													#
+												</th>
+												#foreach(${column} in ${relationColumn.table.columns})
+												#if(${column.propertyName} != "id" && !${column.activeOrDateOrUser} && ${column.relationTable.name} != ${table.name})
+												<th>
+													${column.title}
+												</th>
+												#end
+												#end
+												<th>
+													<button type="button" class="btn btn-dark" ng-click="add${relationColumn.table.className}($index)">Add</button>
+												</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr ng-repeat="${relationColumn.table.propertyName} in ${table.propertyName}.${relationColumn.table.propertyName}s">
+												<td>
+													{{$index + 1}}
+												</td>
+												#foreach(${column} in ${relationColumn.table.columns})
+												#if(${column.propertyName} != "id" && !${column.activeOrDateOrUser} && ${column.relationTable.name} != ${table.name})
+												<td>
+													<div class="mb-3">
+														<input id="${column.propertyName}" ng-model="${relationColumn.table.propertyName}.${column.propertyName}" type="${column.inputType}" class="${column.inputClass}" placeholder="${column.title}" maxlength="${column.length}" autocomplete="off">
+													</div>
+												</td>
+												#end
+												#end
+												<th>
+													<button type="button" class="btn btn-dark" ng-click="add${relationColumn.table.className}($index)">+</button>
+													<button type="button" class="btn btn-dark" ng-click="delete${relationColumn.table.className}($index)">-</button>
+												</th>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+							#end
+						</div>
+						<div class="modal-footer" ng-hide="submitted">
+							<button type="button" class="btn btn-dark" ng-if="${table.propertyName}.id == null" ng-click="add${table.className}()">Add</button>
+							<button type="button" class="btn btn-dark" ng-if="${table.propertyName}.id != null" ng-click="update${table.className}()">Update</button>
+							<button type="button" class="btn btn-dark" data-bs-dismiss="modal">Close</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal fade" id="viewModal">
+				<div class="modal-dialog modal-xl">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title">View ${table.title}</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<div class="card mt-4">
+								<div class="card-header fw-bold">
+									${table.title} Details
+								</div>
+								<div class="table-responsive">
+									<table class="table table-striped">
+										<tbody>
+											#foreach(${nestedColumn} in ${table.nestedColumns})
+											#if(${column.relationTable.name} != ${table.name} && (!${nestedColumn.activeOrDateOrUser} || ${nestedColumn.table.name} == ${table.name}))
+											<tr>
+												<th>
+													${nestedColumn.title}
+												</th>
+												<td>
+													#if(${column.type} == -7 || ${column.type} == 16)
+													{{${table.propertyName}.${nestedColumn.fieldModel} ? 'Yes' : 'No'}}
+													#else
+													{{${table.propertyName}.${nestedColumn.fieldModel}}}
+													#end
+												</td>
+											</tr>
+											#end
+											#end
+										</tbody>
+									</table>
+								</div>
+							</div>
+							#foreach(${relationColumn} in ${table.exportedKeys})
+							<div class="card mt-4">
+								<div class="card-header fw-bold">
+									${relationColumn.table.title} List
+								</div>
+								<div class="table-responsive">
+									<table class="table table-striped">
+										<thead>
+											<tr>
+												<th>
+													#
+												</th>
+												#foreach(${column} in ${relationColumn.table.columns})
+												#if(${column.propertyName} != "id" && ${column.propertyName} != "active" && ${column.relationTable.name} != ${table.name})
+												<th>
+													${column.title}
+												</th>
+												#end
+												#end
+											</tr>
+										</thead>
+										<tbody>
+											<tr ng-repeat="${relationColumn.table.propertyName} in ${table.propertyName}.${relationColumn.table.propertyName}s">
+												<td>
+													{{$index + 1}}
+												</td>
+												#foreach(${column} in ${relationColumn.table.columns})
+												#if(${column.propertyName} != "id" && ${column.propertyName} != "active" && ${column.relationTable.name} != ${table.name})
+												<td>
+													#if(${column.type} == -7 || ${column.type} == 16)
+													{{${relationColumn.table.propertyName}.${column.fieldModel} ? 'Yes' : 'No'}}
+													#else
+													{{${relationColumn.table.propertyName}.${column.fieldModel}}}
+													#end
+												</td>
+												#end
+												#end
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+							#end
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-dark" data-bs-dismiss="modal">Close</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal fade" id="activateModal">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title">{{${table.propertyName}.active ? 'Deactivate' : 'Activate'}} ${table.title}</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<h4>Are you sure to {{${table.propertyName}.active ? 'deactivate' : 'activate'}} ${table.title}</h4>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-dark" data-bs-dismiss="modal" ng-if="!${table.propertyName}.active" ng-click="update${table.className}Active()">Activate</button>
+							<button type="button" class="btn btn-dark" data-bs-dismiss="modal" ng-if="${table.propertyName}.active" ng-click="update${table.className}Active()">Deactivate</button>
+							<button type="button" class="btn btn-dark" data-bs-dismiss="modal">Close</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script>
+			
+			var application = angular.module("application", []);
+
+			application.controller("controller", 
+
+				function(#[[$scope]]#, #[[$http]]#, $timeout){
+				
+					#[[$scope]]#.alert = {class:"d-none", message:null};
+					
+					#[[$scope]]#.loading = true;
+					#[[$scope]]#.submitted = false;
+					
+					#[[$scope]]#.${table.propertyName}s = new Array();
+					
+					#[[$scope]]#.${table.propertyName}Search = new Object();
+					#[[$scope]]#.${table.propertyName}Search.rowCount = 5;
+					#[[$scope]]#.${table.propertyName}Search.pageNo = 1;
+					#[[$scope]]#.${table.propertyName}Search.pageCount = 0;
+					#[[$scope]]#.${table.propertyName}Search.totalRows = 0;
+					#foreach(${relationColumn} in ${table.importedKeys})
+					#[[$scope]]#.${table.propertyName}Search.${relationColumn.relationPropertyName} = new Object();
+					#end
+					
+					#[[$scope]]#.${table.propertyName} = new Object();
+					#foreach(${relationColumn} in ${table.importedKeys})
+					#[[$scope]]#.${table.propertyName}.${relationColumn.relationPropertyName} = new Object();
+					#end
+					#foreach(${relationColumn} in ${table.exportedKeys})
+					#[[$scope]]#.${table.propertyName}.${relationColumn.table.propertyName}s = new Array();
+					#end
+					
+					#[[$scope]]#.search${table.className}s = function(alert){
+						
+						window.scrollTo(0, 0);
+						
+						#[[$scope]]#.loading = true;
+						
+						if(alert){
+							#[[$scope]]#.alert = {class:"alert-warning", message:"Please wait"};
+						}
+						
+						#[[$http]]#.post("./search${table.className}s", #[[$scope]]#.${table.propertyName}Search).then(function(result){
+							
+							#[[$scope]]#.loading = false;
+							
+							if(alert){
+								#[[$scope]]#.alert = {class:"d-none", message:null};
+							}
+							
+							#[[$scope]]#.${table.propertyName}s = result.data;
+							
+						}).catch(function(error){
+							
+							#[[$scope]]#.loading = false;
+							
+							#[[$scope]]#.alert = {class:"alert-danger", message:error};
+						});
+						
+						#[[$http]]#.post("./get${table.className}Count", #[[$scope]]#.${table.propertyName}Search).then(function(result){
+							
+							#[[$scope]]#.${table.propertyName}Search = result.data;
+							
+						}).catch(function(error){
+							
+							#[[$scope]]#.alert = {class:"alert-danger", message:error};
+						});
+					}
+					
+					#[[$scope]]#.search${table.className}s(true);
+					
+					#[[$scope]]#.first = function(){
+						#[[$scope]]#.${table.propertyName}Search.pageNo = 1;
+						#[[$scope]]#.search${table.className}s(true);
+					}
+					
+					#[[$scope]]#.previous = function(){
+						#[[$scope]]#.${table.propertyName}Search.pageNo--;
+						#[[$scope]]#.search${table.className}s(true);
+					}
+					
+					#[[$scope]]#.next = function(){
+						#[[$scope]]#.${table.propertyName}Search.pageNo++;
+						#[[$scope]]#.search${table.className}s(true);
+					}
+					
+					#[[$scope]]#.last = function(){
+						#[[$scope]]#.${table.propertyName}Search.pageNo = #[[$scope]]#.${table.propertyName}Search.pageCount;
+						#[[$scope]]#.search${table.className}s(true);
+					}
+					
+					#[[$scope]]#.select${table.className} = function(${table.propertyName}){
+						
+						#[[$http]]#.post("./get${table.className}", ${table.propertyName}).then(function(result){
+							
+							#[[$scope]]#.${table.propertyName} = result.data;
+							
+						}).catch(function(error){
+							
+							#[[$scope]]#.alert = {class:"alert-danger", message:error};
+						});
+					}
+					
+					#[[$scope]]#.toAdd${table.className} = function(){
+						
+						#[[$scope]]#.submitted = false;
+						
+						#[[$scope]]#.alert = {class:"alert-info", message:"Please enter ${table.title} Details"};
+						
+						#[[$scope]]#.${table.propertyName} = new Object();
+						#foreach(${relationColumn} in ${table.importedKeys})
+						#[[$scope]]#.${table.propertyName}.${relationColumn.relationPropertyName} = new Object();
+						#end
+						#foreach(${relationColumn} in ${table.exportedKeys})
+						#[[$scope]]#.${table.propertyName}.${relationColumn.table.propertyName}s = new Array();
+						#end
+					}
+					
+					#[[$scope]]#.add${table.className} = function(){
+						
+						window.scrollTo(0, 0);
+						
+						var result = isValidForm();
+						
+						if(result == null){
+							
+							#[[$scope]]#.submitted = true;
+							
+							#[[$http]]#.post("./save${table.className}", #[[$scope]]#.${table.propertyName}).then(function(result){
+								
+								$("#${table.propertyName}Modal").modal("hide");
+								
+								#[[$scope]]#.${table.propertyName} = result.data;
+								
+								#[[$scope]]#.alert = {class:"alert-success", message:"${table.title} with ID#" + #[[$scope]]#.${table.propertyName}.id + " has been added successfully"};
+								
+								#[[$scope]]#.search${table.className}s(false);
+								
+							}).catch(function(error){
+								
+								#[[$scope]]#.submitted = false;
+								
+								#[[$scope]]#.alert = {class:"alert-danger", message:error};
+							});
+							
+						}else{
+							
+							#[[$scope]]#.alert = {class:"alert-danger", message:result};
+						}
+					}
+					
+					#[[$scope]]#.toUpdate${table.className} = function(${table.propertyName}){
+						
+						#[[$scope]]#.submitted = false;
+						
+						#[[$http]]#.post("./get${table.className}", ${table.propertyName}).then(function(result){
+							
+							#[[$scope]]#.${table.propertyName} = result.data;
+							
+							#[[$scope]]#.alert = {class:"alert-info", message:"Please update ${table.className} Details"};
+							
+							#foreach(${relationColumn} in ${table.exportedKeys})
+							if(#[[$scope]]#.${table.propertyName}.${relationColumn.table.propertyName}s == null){
+								#[[$scope]]#.${table.propertyName}.${relationColumn.table.propertyName}s = new Array();
+							}
+							#end
+							
+							$timeout(function(){
+								
+								isValidForm();
+							});
+							
+						}).catch(function(error){
+							
+							#[[$scope]]#.alert = {class:"alert-danger", message:error};
+						});
+					}
+					
+					#[[$scope]]#.update${table.className} = function(){
+						
+						window.scrollTo(0, 0);
+						
+						var result = isValidForm();
+						
+						if(result == null){
+							
+							#[[$scope]]#.submitted = true;
+							
+							#[[$http]]#.post("./save${table.className}", #[[$scope]]#.${table.propertyName}).then(function(result){
+								
+								$("#${table.propertyName}Modal").modal("hide");
+								
+								#[[$scope]]#.${table.propertyName} = result.data;
+								
+								#[[$scope]]#.alert = {class:"alert-success", message:"${table.title} with ID#" + #[[$scope]]#.${table.propertyName}.id + " has been updated successfully"};
+								
+								#[[$scope]]#.search${table.className}s(false);
+								
+							}).catch(function(error){
+								
+								#[[$scope]]#.submitted = false;
+								
+								#[[$scope]]#.alert = {class:"alert-danger", message:error.data};
+							});
+							
+						}else{
+							
+							#[[$scope]]#.alert = {class:"alert-danger", message:result};
+						}
+					}
+					
+					#[[$scope]]#.update${table.className}Active = function(){
+						
+						window.scrollTo(0, 0);
+						
+						#[[$scope]]#.${table.propertyName}.active = !#[[$scope]]#.${table.propertyName}.active;
+						
+						#[[$http]]#.post("./update${table.className}Active", #[[$scope]]#.${table.propertyName}).then(function(result){
+							
+							#[[$scope]]#.${table.propertyName} = result.data;
+							
+							if(#[[$scope]]#.${table.propertyName}.active){
+								
+								#[[$scope]]#.alert = {class:"alert-success", message:"${table.title} with ID#" + #[[$scope]]#.${table.propertyName}.id + " has been activated successfully"};
+								
+							}else{
+								
+								#[[$scope]]#.alert = {class:"alert-success", message:"${table.title} with ID#" + #[[$scope]]#.${table.propertyName}.id + " has been deactivated successfully"};
+							}
+							
+							#[[$scope]]#.search${table.className}s(false);
+							
+						}).catch(function(error){
+							
+							#[[$scope]]#.alert = {class:"alert-danger", message:error.data};
+						});
+					}
+					
+					#foreach(${relationColumn} in ${table.exportedKeys})
+					#[[$scope]]#.add${relationColumn.table.className} = function(index){
+						#[[$scope]]#.${table.propertyName}.${relationColumn.table.propertyName}s.splice(index, 0, new Object());
+					}
+					
+					#[[$scope]]#.delete${relationColumn.table.className} = function(index){
+						#[[$scope]]#.${table.propertyName}.${relationColumn.table.propertyName}s.splice(index, 1);
+					}
+					#end
+				}
+			);
+		</script>
+		<script src="common.js"></script>
+	</body>
+</html>

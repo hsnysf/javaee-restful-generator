@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	
+		<title>Chief Executive Officer Management</title>
+		
+		<meta http-equiv="Expires" content="-1">
+		<meta http-equiv="Pragma" content="no-cache">
+		<meta http-equiv="Cache-Control" content="no-cache">
+
+		<meta charset="UTF-8">
+		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+		
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="viewport" content="width = device-width, initial-scale = 1, user-scalable = no">
+
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+		
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+		<link href="common.css" rel="stylesheet">
+		
+	    <link rel="shortcut icon" href="https://upload.wikimedia.org/wikipedia/en/thumb/3/30/Java_programming_language_logo.svg/800px-Java_programming_language_logo.svg.png">
+		<link rel="apple-touch-icon" href="https://upload.wikimedia.org/wikipedia/en/thumb/3/30/Java_programming_language_logo.svg/800px-Java_programming_language_logo.svg.png">
+		<link rel="apple-touch-startup-image" href="https://upload.wikimedia.org/wikipedia/en/thumb/3/30/Java_programming_language_logo.svg/800px-Java_programming_language_logo.svg.png">
+		<link rel="apple-touch-icon-precomposed" href="https://upload.wikimedia.org/wikipedia/en/thumb/3/30/Java_programming_language_logo.svg/800px-Java_programming_language_logo.svg.png">
+	
+	</head>
+	<body>
+		<div class="container-fluid" ng-app="application" ng-controller="controller">
+		
+			<h4 class="pb-2 mt-4 mb-3 border-bottom">
+				Chief Executive Officer Management
+			</h4>
+			
+			<div id="alert" ng-class="alert.class" ng-bind="alert.message" class="alert fw-bold text-center" role="alert">
+			</div>
+			
+			<div class="card">
+				<div class="card-header fw-bold">
+					Chief Executive Officer Search
+				</div>
+				<div class="card-body">
+					<div class="row">
+						<div class="col-sm-12 col-md-6 col-lg-4">
+							<div class="mb-3">
+								<label for="employeeIdSearch" class="form-label">Employee Id</label>
+								<input id="employeeIdSearch" ng-model="chiefExecutiveOfficerSearch.id" type="tel" class="form-control is-valid" placeholder="Employee Id" maxlength="10" autocomplete="off">
+							</div>
+						</div>
+						<div class="col-sm-12 col-md-6 col-lg-4">
+							<div class="mb-3">
+								<label for="employeeCprSearch" class="form-label">Employee Cpr</label>
+								<input id="employeeCprSearch" ng-model="chiefExecutiveOfficerSearch.cpr" type="tel" class="form-control is-valid cpr" placeholder="Employee Cpr" maxlength="9" autocomplete="off">
+							</div>
+						</div>
+						<div class="col-sm-12 col-md-6 col-lg-4">
+							<div class="mb-3">
+								<label for="employeeNameSearch" class="form-label">Employee Name</label>
+								<input id="employeeNameSearch" ng-model="chiefExecutiveOfficerSearch.name" type="text" class="form-control is-valid name" placeholder="Employee Name" maxlength="255" autocomplete="off">
+							</div>
+						</div>
+						<div class="col-sm-12 col-md-6 col-lg-4">
+							<div class="mb-3">
+								<label for="employeeAgeSearch" class="form-label">Employee Age</label>
+								<input id="employeeAgeSearch" ng-model="chiefExecutiveOfficerSearch.age" type="tel" class="form-control is-valid age" placeholder="Employee Age" maxlength="2" autocomplete="off">
+							</div>
+						</div>
+						<div class="col-sm-12 col-md-6 col-lg-4">
+							<div class="mb-3">
+								<label for="employeeEmailSearch" class="form-label">Employee Email</label>
+								<input id="employeeEmailSearch" ng-model="chiefExecutiveOfficerSearch.email" type="text" class="form-control is-valid email" placeholder="Employee Email" maxlength="255" autocomplete="off">
+							</div>
+						</div>
+						<div class="col-sm-12 col-md-6 col-lg-4">
+							<div class="mb-3">
+								<label for="employeeGenderSearch" class="form-label">Employee Gender</label>
+								<input id="employeeGenderSearch" ng-model="chiefExecutiveOfficerSearch.gender" type="text" class="form-control is-valid" placeholder="Employee Gender" maxlength="1" autocomplete="off">
+							</div>
+						</div>
+						<div class="col-sm-12 col-md-6 col-lg-4">
+							<div class="mb-3">
+								<label for="employeeMobileSearch" class="form-label">Employee Mobile</label>
+								<input id="employeeMobileSearch" ng-model="chiefExecutiveOfficerSearch.mobile" type="tel" class="form-control is-valid mobile" placeholder="Employee Mobile" maxlength="8" autocomplete="off">
+							</div>
+						</div>
+						<div class="col-sm-12 col-md-6 col-lg-4">
+							<div class="mb-3">
+								<label for="employeeSalarySearch" class="form-label">Employee Salary</label>
+								<input id="employeeSalarySearch" ng-model="chiefExecutiveOfficerSearch.salary" type="number" class="form-control is-valid" placeholder="Employee Salary" maxlength="17" autocomplete="off">
+							</div>
+						</div>
+						<div class="col-sm-12 col-md-6 col-lg-4">
+							<div class="mb-3">
+								<label for="addressIdSearch" class="form-label">Address Id</label>
+								<input id="addressIdSearch" ng-model="chiefExecutiveOfficerSearch.address.id" type="tel" class="form-control is-valid" placeholder="Address Id" maxlength="10" autocomplete="off">
+							</div>
+						</div>
+						<div class="col-sm-12 col-md-6 col-lg-4">
+							<div class="mb-3">
+								<label for="addressBuildingSearch" class="form-label">Address Building</label>
+								<input id="addressBuildingSearch" ng-model="chiefExecutiveOfficerSearch.address.building" type="tel" class="form-control is-valid" placeholder="Address Building" maxlength="10" autocomplete="off">
+							</div>
+						</div>
+						<div class="col-sm-12 col-md-6 col-lg-4">
+							<div class="mb-3">
+								<label for="addressRoadSearch" class="form-label">Address Road</label>
+								<input id="addressRoadSearch" ng-model="chiefExecutiveOfficerSearch.address.road" type="tel" class="form-control is-valid" placeholder="Address Road" maxlength="10" autocomplete="off">
+							</div>
+						</div>
+						<div class="col-sm-12 col-md-6 col-lg-4">
+							<div class="mb-3">
+								<label for="addressBlockSearch" class="form-label">Address Block</label>
+								<input id="addressBlockSearch" ng-model="chiefExecutiveOfficerSearch.address.block" type="tel" class="form-control is-valid" placeholder="Address Block" maxlength="10" autocomplete="off">
+							</div>
+						</div>
+						<div class="col-sm-12 col-md-6 col-lg-4">
+							<div class="mb-3">
+								<label for="cityIdSearch" class="form-label">City Id</label>
+								<input id="cityIdSearch" ng-model="chiefExecutiveOfficerSearch.address.city.id" type="tel" class="form-control is-valid" placeholder="City Id" maxlength="10" autocomplete="off">
+							</div>
+						</div>
+						<div class="col-sm-12 col-md-6 col-lg-4">
+							<div class="mb-3">
+								<label for="cityNameSearch" class="form-label">City Name</label>
+								<input id="cityNameSearch" ng-model="chiefExecutiveOfficerSearch.address.city.name" type="text" class="form-control is-valid name" placeholder="City Name" maxlength="100" autocomplete="off">
+							</div>
+						</div>
+						<div class="col-sm-12 col-md-6 col-lg-4">
+							<div class="mb-3">
+								<label for="cityActiveSearch" class="form-label">City Active</label>
+								<select id="cityActiveSearch" ng-model="chiefExecutiveOfficerSearch.address.city.active" class="form-control is-valid" placeholder="City Active" autocomplete="off">
+									<option ng-value="">City Active</option>
+									<option ng-value="true">Yes</option>
+									<option ng-value="false">No</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-sm-12 col-md-6 col-lg-4">
+							<div class="mb-3">
+								<label for="addressActiveSearch" class="form-label">Address Active</label>
+								<select id="addressActiveSearch" ng-model="chiefExecutiveOfficerSearch.address.active" class="form-control is-valid" placeholder="Address Active" autocomplete="off">
+									<option ng-value="">Address Active</option>
+									<option ng-value="true">Yes</option>
+									<option ng-value="false">No</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-sm-12 col-md-6 col-lg-4">
+							<div class="mb-3">
+								<label for="employeeActiveSearch" class="form-label">Employee Active</label>
+								<select id="employeeActiveSearch" ng-model="chiefExecutiveOfficerSearch.active" class="form-control is-valid" placeholder="Employee Active" autocomplete="off">
+									<option ng-value="">Employee Active</option>
+									<option ng-value="true">Yes</option>
+									<option ng-value="false">No</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-sm-12 col-md-6 col-lg-4">
+							<div class="mb-3">
+								<label for="managerDegreeSearch" class="form-label">Manager Degree</label>
+								<input id="managerDegreeSearch" ng-model="chiefExecutiveOfficerSearch.degree" type="tel" class="form-control is-valid" placeholder="Manager Degree" maxlength="10" autocomplete="off">
+							</div>
+						</div>
+						<div class="col-sm-12 col-md-6 col-lg-4">
+							<div class="mb-3">
+								<label for="managerAllowanceSearch" class="form-label">Manager Allowance</label>
+								<input id="managerAllowanceSearch" ng-model="chiefExecutiveOfficerSearch.allowance" type="number" class="form-control is-valid" placeholder="Manager Allowance" maxlength="17" autocomplete="off">
+							</div>
+						</div>
+						<div class="col-sm-12 col-md-6 col-lg-4">
+							<div class="mb-3">
+								<label for="chiefExecutiveOfficerSectorSearch" class="form-label">Chief Executive Officer Sector</label>
+								<input id="chiefExecutiveOfficerSectorSearch" ng-model="chiefExecutiveOfficerSearch.sector" type="text" class="form-control is-valid" placeholder="Chief Executive Officer Sector" maxlength="200" autocomplete="off">
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="card-footer text-center" ng-hide="loading">
+					<button type="button" class="btn btn-dark" ng-click="searchChiefExecutiveOfficers(true)">Search</button>
+				</div>
+			</div>
+			
+			<div class="card mt-4">
+				<div class="card-header fw-bold">
+					Chief Executive Officer List
+				</div>
+				<div class="table-responsive">
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th>
+									#
+								</th>
+								<th>
+									Employee Id
+								</th>
+								<th>
+									Employee Cpr
+								</th>
+								<th>
+									Employee Name
+								</th>
+								<th>
+									Employee Age
+								</th>
+								<th>
+									Employee Email
+								</th>
+								<th>
+									Employee Gender
+								</th>
+								<th>
+									Employee Mobile
+								</th>
+								<th>
+									Employee Salary
+								</th>
+								<th>
+									Address Id
+								</th>
+								<th>
+									Address Building
+								</th>
+								<th>
+									Address Road
+								</th>
+								<th>
+									Address Block
+								</th>
+								<th>
+									City Id
+								</th>
+								<th>
+									City Name
+								</th>
+								<th>
+									Manager Degree
+								</th>
+								<th>
+									Manager Allowance
+								</th>
+								<th>
+									Chief Executive Officer Sector
+								</th>
+								<th>
+									<button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#chiefExecutiveOfficerModal" ng-click="toAddChiefExecutiveOfficer()">Add</button>
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="chiefExecutiveOfficer in chiefExecutiveOfficers" ng-hide="loading">
+								<td>
+									{{$index + 1}}
+								</td>
+								<td>
+									{{chiefExecutiveOfficer.id}}
+								</td>
+								<td>
+									{{chiefExecutiveOfficer.cpr}}
+								</td>
+								<td>
+									{{chiefExecutiveOfficer.name}}
+								</td>
+								<td>
+									{{chiefExecutiveOfficer.age}}
+								</td>
+								<td>
+									{{chiefExecutiveOfficer.email}}
+								</td>
+								<td>
+									{{chiefExecutiveOfficer.gender}}
+								</td>
+								<td>
+									{{chiefExecutiveOfficer.mobile}}
+								</td>
+								<td>
+									{{chiefExecutiveOfficer.salary}}
+								</td>
+								<td>
+									{{chiefExecutiveOfficer.address.id}}
+								</td>
+								<td>
+									{{chiefExecutiveOfficer.address.building}}
+								</td>
+								<td>
+									{{chiefExecutiveOfficer.address.road}}
+								</td>
+								<td>
+									{{chiefExecutiveOfficer.address.block}}
+								</td>
+								<td>
+									{{chiefExecutiveOfficer.address.city.id}}
+								</td>
+								<td>
+									{{chiefExecutiveOfficer.address.city.name}}
+								</td>
+								<td>
+									{{chiefExecutiveOfficer.degree}}
+								</td>
+								<td>
+									{{chiefExecutiveOfficer.allowance}}
+								</td>
+								<td>
+									{{chiefExecutiveOfficer.sector}}
+								</td>
+								<th>
+									<button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#viewModal" ng-click="selectChiefExecutiveOfficer(chiefExecutiveOfficer)">View</button>
+									<button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#chiefExecutiveOfficerModal" ng-click="toUpdateChiefExecutiveOfficer(chiefExecutiveOfficer)">Edit</button>
+									<button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#activateModal" ng-if="!chiefExecutiveOfficer.active" ng-click="selectChiefExecutiveOfficer(chiefExecutiveOfficer)">Activate</button>
+									<button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#activateModal" ng-if="chiefExecutiveOfficer.active" ng-click="selectChiefExecutiveOfficer(chiefExecutiveOfficer)">Deactivate</button>
+								</th>
+							</tr>
+							<tr ng-show="loading">
+								<td align="center" colspan="100">
+									<div class="spinner-border" role="status">
+										<span class="sr-only"></span>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="card-footer" ng-if="chiefExecutiveOfficerSearch.totalRows != 0">
+					<div class="row">
+						<div class="col-3 text-start">
+							<button type="button" class="btn btn-dark" ng-if="chiefExecutiveOfficerSearch.pageNo != 1" ng-click="first()">First</button>
+							<button type="button" class="btn btn-dark" ng-if="chiefExecutiveOfficerSearch.pageNo != 1" ng-click="previous()">Previous</button>
+						</div>
+						<div class="col-2 text-center">
+							<label class="fw-bold">
+								Rows :
+								<select ng-model="chiefExecutiveOfficerSearch.rowCount" class="form-control d-inline w-auto" ng-change="first()">
+									<option ng-value="5">5</option>
+									<option ng-value="10">10</option>
+									<option ng-value="15">15</option>
+									<option ng-value="20">20</option>
+								</select>
+							</label>
+						</div>
+						<div class="col-2 text-center">
+							<label class="fw-bold pt-1">
+								Total : {{chiefExecutiveOfficerSearch.totalRows}}
+							</label>
+						</div>
+						<div class="col-2 text-center">
+							<label class="fw-bold pt-1">
+								Page {{chiefExecutiveOfficerSearch.pageNo}} of {{chiefExecutiveOfficerSearch.pageCount}}
+							</label>
+						</div>
+						<div class="col-3 text-end">
+							<button type="button" class="btn btn-dark" ng-if="chiefExecutiveOfficerSearch.pageNo != chiefExecutiveOfficerSearch.pageCount" ng-click="next()">Next</button>
+							<button type="button" class="btn btn-dark" ng-if="chiefExecutiveOfficerSearch.pageNo != chiefExecutiveOfficerSearch.pageCount" ng-click="last()">Last</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<br>
+			<br>
+			<div class="modal fade" id="chiefExecutiveOfficerModal">
+				<div class="modal-dialog modal-xl">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title">{{chiefExecutiveOfficer.id == null ? 'Add' : 'Update'}} Chief Executive Officer</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<div id="alert" ng-class="alert.class" ng-bind="alert.message" class="alert fw-bold text-center" role="alert">
+							</div>
+							<div class="card mt-4">
+								<div class="card-header fw-bold">
+									Chief Executive Officer Details
+								</div>
+								<div class="card-body">
+									<div class="row">
+										<div class="col-sm-12 col-md-6 col-lg-4">
+											<div class="mb-3">
+												<label for="employeeCpr" class="form-label">Employee Cpr</label>
+												<input id="employeeCpr" ng-model="chiefExecutiveOfficer.cpr" type="tel" class="form-control is-valid cpr" placeholder="Employee Cpr" maxlength="9" autocomplete="off">
+											</div>
+										</div>
+										<div class="col-sm-12 col-md-6 col-lg-4">
+											<div class="mb-3">
+												<label for="employeeName" class="form-label">Employee Name</label>
+												<input id="employeeName" ng-model="chiefExecutiveOfficer.name" type="text" class="form-control is-valid name" placeholder="Employee Name" maxlength="255" autocomplete="off">
+											</div>
+										</div>
+										<div class="col-sm-12 col-md-6 col-lg-4">
+											<div class="mb-3">
+												<label for="employeeAge" class="form-label">Employee Age</label>
+												<input id="employeeAge" ng-model="chiefExecutiveOfficer.age" type="tel" class="form-control is-valid age" placeholder="Employee Age" maxlength="2" autocomplete="off">
+											</div>
+										</div>
+										<div class="col-sm-12 col-md-6 col-lg-4">
+											<div class="mb-3">
+												<label for="employeeEmail" class="form-label">Employee Email</label>
+												<input id="employeeEmail" ng-model="chiefExecutiveOfficer.email" type="text" class="form-control is-valid email" placeholder="Employee Email" maxlength="255" autocomplete="off">
+											</div>
+										</div>
+										<div class="col-sm-12 col-md-6 col-lg-4">
+											<div class="mb-3">
+												<label for="employeeGender" class="form-label">Employee Gender</label>
+												<input id="employeeGender" ng-model="chiefExecutiveOfficer.gender" type="text" class="form-control is-valid" placeholder="Employee Gender" maxlength="1" autocomplete="off">
+											</div>
+										</div>
+										<div class="col-sm-12 col-md-6 col-lg-4">
+											<div class="mb-3">
+												<label for="employeeMobile" class="form-label">Employee Mobile</label>
+												<input id="employeeMobile" ng-model="chiefExecutiveOfficer.mobile" type="tel" class="form-control is-valid mobile" placeholder="Employee Mobile" maxlength="8" autocomplete="off">
+											</div>
+										</div>
+										<div class="col-sm-12 col-md-6 col-lg-4">
+											<div class="mb-3">
+												<label for="employeeSalary" class="form-label">Employee Salary</label>
+												<input id="employeeSalary" ng-model="chiefExecutiveOfficer.salary" type="number" class="form-control is-valid" placeholder="Employee Salary" maxlength="17" autocomplete="off">
+											</div>
+										</div>
+										<div class="col-sm-12 col-md-6 col-lg-4">
+											<div class="mb-3">
+												<label for="addressBuilding" class="form-label">Address Building</label>
+												<input id="addressBuilding" ng-model="chiefExecutiveOfficer.address.building" type="tel" class="form-control is-valid" placeholder="Address Building" maxlength="10" autocomplete="off">
+											</div>
+										</div>
+										<div class="col-sm-12 col-md-6 col-lg-4">
+											<div class="mb-3">
+												<label for="addressRoad" class="form-label">Address Road</label>
+												<input id="addressRoad" ng-model="chiefExecutiveOfficer.address.road" type="tel" class="form-control is-valid" placeholder="Address Road" maxlength="10" autocomplete="off">
+											</div>
+										</div>
+										<div class="col-sm-12 col-md-6 col-lg-4">
+											<div class="mb-3">
+												<label for="addressBlock" class="form-label">Address Block</label>
+												<input id="addressBlock" ng-model="chiefExecutiveOfficer.address.block" type="tel" class="form-control is-valid" placeholder="Address Block" maxlength="10" autocomplete="off">
+											</div>
+										</div>
+										<div class="col-sm-12 col-md-6 col-lg-4">
+											<div class="mb-3">
+												<label for="cityName" class="form-label">City Name</label>
+												<input id="cityName" ng-model="chiefExecutiveOfficer.address.city.name" type="text" class="form-control is-valid name" placeholder="City Name" maxlength="100" autocomplete="off">
+											</div>
+										</div>
+										<div class="col-sm-12 col-md-6 col-lg-4">
+											<div class="mb-3">
+												<label for="managerDegree" class="form-label">Manager Degree</label>
+												<input id="managerDegree" ng-model="chiefExecutiveOfficer.degree" type="tel" class="form-control is-valid" placeholder="Manager Degree" maxlength="10" autocomplete="off">
+											</div>
+										</div>
+										<div class="col-sm-12 col-md-6 col-lg-4">
+											<div class="mb-3">
+												<label for="managerAllowance" class="form-label">Manager Allowance</label>
+												<input id="managerAllowance" ng-model="chiefExecutiveOfficer.allowance" type="number" class="form-control is-valid" placeholder="Manager Allowance" maxlength="17" autocomplete="off">
+											</div>
+										</div>
+										<div class="col-sm-12 col-md-6 col-lg-4">
+											<div class="mb-3">
+												<label for="chiefExecutiveOfficerSector" class="form-label">Chief Executive Officer Sector</label>
+												<input id="chiefExecutiveOfficerSector" ng-model="chiefExecutiveOfficer.sector" type="text" class="form-control is-valid" placeholder="Chief Executive Officer Sector" maxlength="200" autocomplete="off">
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer" ng-hide="submitted">
+							<button type="button" class="btn btn-dark" ng-if="chiefExecutiveOfficer.id == null" ng-click="addChiefExecutiveOfficer()">Add</button>
+							<button type="button" class="btn btn-dark" ng-if="chiefExecutiveOfficer.id != null" ng-click="updateChiefExecutiveOfficer()">Update</button>
+							<button type="button" class="btn btn-dark" data-bs-dismiss="modal">Close</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal fade" id="viewModal">
+				<div class="modal-dialog modal-xl">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title">View Chief Executive Officer</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<div class="card mt-4">
+								<div class="card-header fw-bold">
+									Chief Executive Officer Details
+								</div>
+								<div class="table-responsive">
+									<table class="table table-striped">
+										<tbody>
+											<tr>
+												<th>
+													Employee Id
+												</th>
+												<td>
+													{{chiefExecutiveOfficer.id}}
+												</td>
+											</tr>
+											<tr>
+												<th>
+													Employee Cpr
+												</th>
+												<td>
+													{{chiefExecutiveOfficer.cpr}}
+												</td>
+											</tr>
+											<tr>
+												<th>
+													Employee Name
+												</th>
+												<td>
+													{{chiefExecutiveOfficer.name}}
+												</td>
+											</tr>
+											<tr>
+												<th>
+													Employee Age
+												</th>
+												<td>
+													{{chiefExecutiveOfficer.age}}
+												</td>
+											</tr>
+											<tr>
+												<th>
+													Employee Email
+												</th>
+												<td>
+													{{chiefExecutiveOfficer.email}}
+												</td>
+											</tr>
+											<tr>
+												<th>
+													Employee Gender
+												</th>
+												<td>
+													{{chiefExecutiveOfficer.gender}}
+												</td>
+											</tr>
+											<tr>
+												<th>
+													Employee Mobile
+												</th>
+												<td>
+													{{chiefExecutiveOfficer.mobile}}
+												</td>
+											</tr>
+											<tr>
+												<th>
+													Employee Salary
+												</th>
+												<td>
+													{{chiefExecutiveOfficer.salary}}
+												</td>
+											</tr>
+											<tr>
+												<th>
+													Address Id
+												</th>
+												<td>
+													{{chiefExecutiveOfficer.address.id}}
+												</td>
+											</tr>
+											<tr>
+												<th>
+													Address Building
+												</th>
+												<td>
+													{{chiefExecutiveOfficer.address.building}}
+												</td>
+											</tr>
+											<tr>
+												<th>
+													Address Road
+												</th>
+												<td>
+													{{chiefExecutiveOfficer.address.road}}
+												</td>
+											</tr>
+											<tr>
+												<th>
+													Address Block
+												</th>
+												<td>
+													{{chiefExecutiveOfficer.address.block}}
+												</td>
+											</tr>
+											<tr>
+												<th>
+													City Id
+												</th>
+												<td>
+													{{chiefExecutiveOfficer.address.city.id}}
+												</td>
+											</tr>
+											<tr>
+												<th>
+													City Name
+												</th>
+												<td>
+													{{chiefExecutiveOfficer.address.city.name}}
+												</td>
+											</tr>
+											<tr>
+												<th>
+													Manager Degree
+												</th>
+												<td>
+													{{chiefExecutiveOfficer.degree}}
+												</td>
+											</tr>
+											<tr>
+												<th>
+													Manager Allowance
+												</th>
+												<td>
+													{{chiefExecutiveOfficer.allowance}}
+												</td>
+											</tr>
+											<tr>
+												<th>
+													Chief Executive Officer Sector
+												</th>
+												<td>
+													{{chiefExecutiveOfficer.sector}}
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-dark" data-bs-dismiss="modal">Close</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal fade" id="activateModal">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title">{{chiefExecutiveOfficer.active ? 'Deactivate' : 'Activate'}} Chief Executive Officer</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<h4>Are you sure to {{chiefExecutiveOfficer.active ? 'deactivate' : 'activate'}} Chief Executive Officer</h4>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-dark" data-bs-dismiss="modal" ng-if="!chiefExecutiveOfficer.active" ng-click="updateChiefExecutiveOfficerActive()">Activate</button>
+							<button type="button" class="btn btn-dark" data-bs-dismiss="modal" ng-if="chiefExecutiveOfficer.active" ng-click="updateChiefExecutiveOfficerActive()">Deactivate</button>
+							<button type="button" class="btn btn-dark" data-bs-dismiss="modal">Close</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script>
+			
+			var application = angular.module("application", []);
+
+			application.controller("controller", 
+
+				function($scope, $http, $timeout){
+				
+					$scope.alert = {class:"d-none", message:null};
+					
+					$scope.loading = true;
+					$scope.submitted = false;
+					
+					$scope.chiefExecutiveOfficers = new Array();
+					
+					$scope.chiefExecutiveOfficerSearch = new Object();
+					$scope.chiefExecutiveOfficerSearch.rowCount = 5;
+					$scope.chiefExecutiveOfficerSearch.pageNo = 1;
+					$scope.chiefExecutiveOfficerSearch.pageCount = 0;
+					$scope.chiefExecutiveOfficerSearch.totalRows = 0;
+					$scope.chiefExecutiveOfficerSearch.id = new Object();
+					
+					$scope.chiefExecutiveOfficer = new Object();
+					$scope.chiefExecutiveOfficer.id = new Object();
+					
+					$scope.searchChiefExecutiveOfficers = function(alert){
+						
+						window.scrollTo(0, 0);
+						
+						$scope.loading = true;
+						
+						if(alert){
+							$scope.alert = {class:"alert-warning", message:"Please wait"};
+						}
+						
+						$http.post("./searchChiefExecutiveOfficers", $scope.chiefExecutiveOfficerSearch).then(function(result){
+							
+							$scope.loading = false;
+							
+							if(alert){
+								$scope.alert = {class:"d-none", message:null};
+							}
+							
+							$scope.chiefExecutiveOfficers = result.data;
+							
+						}).catch(function(error){
+							
+							$scope.loading = false;
+							
+							$scope.alert = {class:"alert-danger", message:error};
+						});
+						
+						$http.post("./getChiefExecutiveOfficerCount", $scope.chiefExecutiveOfficerSearch).then(function(result){
+							
+							$scope.chiefExecutiveOfficerSearch = result.data;
+							
+						}).catch(function(error){
+							
+							$scope.alert = {class:"alert-danger", message:error};
+						});
+					}
+					
+					$scope.searchChiefExecutiveOfficers(true);
+					
+					$scope.first = function(){
+						$scope.chiefExecutiveOfficerSearch.pageNo = 1;
+						$scope.searchChiefExecutiveOfficers(true);
+					}
+					
+					$scope.previous = function(){
+						$scope.chiefExecutiveOfficerSearch.pageNo--;
+						$scope.searchChiefExecutiveOfficers(true);
+					}
+					
+					$scope.next = function(){
+						$scope.chiefExecutiveOfficerSearch.pageNo++;
+						$scope.searchChiefExecutiveOfficers(true);
+					}
+					
+					$scope.last = function(){
+						$scope.chiefExecutiveOfficerSearch.pageNo = $scope.chiefExecutiveOfficerSearch.pageCount;
+						$scope.searchChiefExecutiveOfficers(true);
+					}
+					
+					$scope.selectChiefExecutiveOfficer = function(chiefExecutiveOfficer){
+						
+						$http.post("./getChiefExecutiveOfficer", chiefExecutiveOfficer).then(function(result){
+							
+							$scope.chiefExecutiveOfficer = result.data;
+							
+						}).catch(function(error){
+							
+							$scope.alert = {class:"alert-danger", message:error};
+						});
+					}
+					
+					$scope.toAddChiefExecutiveOfficer = function(){
+						
+						$scope.submitted = false;
+						
+						$scope.alert = {class:"alert-info", message:"Please enter Chief Executive Officer Details"};
+						
+						$scope.chiefExecutiveOfficer = new Object();
+						$scope.chiefExecutiveOfficer.id = new Object();
+					}
+					
+					$scope.addChiefExecutiveOfficer = function(){
+						
+						window.scrollTo(0, 0);
+						
+						var result = isValidForm();
+						
+						if(result == null){
+							
+							$scope.submitted = true;
+							
+							$http.post("./saveChiefExecutiveOfficer", $scope.chiefExecutiveOfficer).then(function(result){
+								
+								$("#chiefExecutiveOfficerModal").modal("hide");
+								
+								$scope.chiefExecutiveOfficer = result.data;
+								
+								$scope.alert = {class:"alert-success", message:"Chief Executive Officer with ID#" + $scope.chiefExecutiveOfficer.id + " has been added successfully"};
+								
+								$scope.searchChiefExecutiveOfficers(false);
+								
+							}).catch(function(error){
+								
+								$scope.submitted = false;
+								
+								$scope.alert = {class:"alert-danger", message:error};
+							});
+							
+						}else{
+							
+							$scope.alert = {class:"alert-danger", message:result};
+						}
+					}
+					
+					$scope.toUpdateChiefExecutiveOfficer = function(chiefExecutiveOfficer){
+						
+						$scope.submitted = false;
+						
+						$http.post("./getChiefExecutiveOfficer", chiefExecutiveOfficer).then(function(result){
+							
+							$scope.chiefExecutiveOfficer = result.data;
+							
+							$scope.alert = {class:"alert-info", message:"Please update ChiefExecutiveOfficer Details"};
+							
+							
+							$timeout(function(){
+								
+								isValidForm();
+							});
+							
+						}).catch(function(error){
+							
+							$scope.alert = {class:"alert-danger", message:error};
+						});
+					}
+					
+					$scope.updateChiefExecutiveOfficer = function(){
+						
+						window.scrollTo(0, 0);
+						
+						var result = isValidForm();
+						
+						if(result == null){
+							
+							$scope.submitted = true;
+							
+							$http.post("./saveChiefExecutiveOfficer", $scope.chiefExecutiveOfficer).then(function(result){
+								
+								$("#chiefExecutiveOfficerModal").modal("hide");
+								
+								$scope.chiefExecutiveOfficer = result.data;
+								
+								$scope.alert = {class:"alert-success", message:"Chief Executive Officer with ID#" + $scope.chiefExecutiveOfficer.id + " has been updated successfully"};
+								
+								$scope.searchChiefExecutiveOfficers(false);
+								
+							}).catch(function(error){
+								
+								$scope.submitted = false;
+								
+								$scope.alert = {class:"alert-danger", message:error.data};
+							});
+							
+						}else{
+							
+							$scope.alert = {class:"alert-danger", message:result};
+						}
+					}
+					
+					$scope.updateChiefExecutiveOfficerActive = function(){
+						
+						window.scrollTo(0, 0);
+						
+						$scope.chiefExecutiveOfficer.active = !$scope.chiefExecutiveOfficer.active;
+						
+						$http.post("./updateChiefExecutiveOfficerActive", $scope.chiefExecutiveOfficer).then(function(result){
+							
+							$scope.chiefExecutiveOfficer = result.data;
+							
+							if($scope.chiefExecutiveOfficer.active){
+								
+								$scope.alert = {class:"alert-success", message:"Chief Executive Officer with ID#" + $scope.chiefExecutiveOfficer.id + " has been activated successfully"};
+								
+							}else{
+								
+								$scope.alert = {class:"alert-success", message:"Chief Executive Officer with ID#" + $scope.chiefExecutiveOfficer.id + " has been deactivated successfully"};
+							}
+							
+							$scope.searchChiefExecutiveOfficers(false);
+							
+						}).catch(function(error){
+							
+							$scope.alert = {class:"alert-danger", message:error.data};
+						});
+					}
+					
+				}
+			);
+		</script>
+		<script src="common.js"></script>
+	</body>
+</html>

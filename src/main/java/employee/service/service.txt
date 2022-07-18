@@ -1,0 +1,57 @@
+package employee.service;
+
+import java.util.List;
+
+import javax.ejb.EJB;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+
+import employee.bean.${table.className}Bean;
+import employee.entity.${table.className};
+
+@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
+@Path("/")
+public class ${table.className}Service {
+
+	@EJB
+	${table.className}Bean ${table.propertyName}Bean;
+	
+	@Path("search${table.className}s")
+	@POST
+	public List<${table.className}> search${table.className}s(${table.className} ${table.propertyName}Search) throws Exception {
+		
+		return ${table.propertyName}Bean.search${table.className}s(${table.propertyName}Search);
+	}
+	
+	@Path("get${table.className}Count")
+	@POST
+	public ${table.className} get${table.className}Count(${table.className} ${table.propertyName}Search) throws Exception {
+		
+		return ${table.propertyName}Bean.get${table.className}Count(${table.propertyName}Search);
+	}
+	
+	@Path("get${table.className}")
+	@POST
+	public ${table.className} get${table.className}(${table.className} ${table.propertyName}) throws Exception {
+		
+		return ${table.propertyName}Bean.get${table.className}(${table.propertyName});
+	}
+	
+	@Path("save${table.className}")
+	@POST
+	public ${table.className} save${table.className}(${table.className} ${table.propertyName}) throws Exception {
+		
+		return ${table.propertyName}Bean.save${table.className}(${table.propertyName});
+	}
+	
+	@Path("update${table.className}Active")
+	@POST
+	public ${table.className} update${table.className}Active(${table.className} ${table.propertyName}) throws Exception {
+		
+		return ${table.propertyName}Bean.update${table.className}Active(${table.propertyName});
+	}
+}
