@@ -14,6 +14,9 @@ create table public.city
 	constraint pk_ct_id primary key (ct_id)
 );
 
+insert into public.city(ct_name) values('Darkulaib');
+insert into public.city(ct_name) values('Aali');
+
 create table public.address
 (
 	addr_id serial,
@@ -30,6 +33,18 @@ create table public.address
 	constraint fk_city_id foreign key (addr_city_id)
 	references public.city (ct_id)
 );
+
+insert into public.address(addr_building, addr_road, addr_block, addr_city_id) values(22, 33, 44, 1);
+insert into public.address(addr_building, addr_road, addr_block, addr_city_id) values(55, 66, 77, 2);
+insert into public.address(addr_building, addr_road, addr_block, addr_city_id) values(22, 33, 44, 1);
+insert into public.address(addr_building, addr_road, addr_block, addr_city_id) values(55, 66, 77, 2);
+insert into public.address(addr_building, addr_road, addr_block, addr_city_id) values(22, 33, 44, 1);
+insert into public.address(addr_building, addr_road, addr_block, addr_city_id) values(55, 66, 77, 2);
+insert into public.address(addr_building, addr_road, addr_block, addr_city_id) values(22, 33, 44, 1);
+insert into public.address(addr_building, addr_road, addr_block, addr_city_id) values(55, 66, 77, 2);
+insert into public.address(addr_building, addr_road, addr_block, addr_city_id) values(22, 33, 44, 1);
+insert into public.address(addr_building, addr_road, addr_block, addr_city_id) values(55, 66, 77, 2);
+
 
 create table public.employee
 (
@@ -52,6 +67,17 @@ create table public.employee
 	references public.address (addr_id)
 );
 
+insert into public.employee(emp_cpr, emp_name, emp_age, emp_email, emp_gender, emp_mobile, emp_salary, emp_address_id) values (123456789, 'Hasan', 12, 'hasan.lmra@gmail.com', 'M', 12345678, 400, 1);
+insert into public.employee(emp_cpr, emp_name, emp_age, emp_email, emp_gender, emp_mobile, emp_salary, emp_address_id) values (987654321, 'Fatima', 33, 'test@gmail.com', 'F', 987654321, 500, 2);
+insert into public.employee(emp_cpr, emp_name, emp_age, emp_email, emp_gender, emp_mobile, emp_salary, emp_address_id) values (123456789, 'Hasan', 12, 'hasan.lmra@gmail.com', 'M', 12345678, 400, 3);
+insert into public.employee(emp_cpr, emp_name, emp_age, emp_email, emp_gender, emp_mobile, emp_salary, emp_address_id) values (987654321, 'Fatima', 33, 'test@gmail.com', 'F', 987654321, 500, 4);
+insert into public.employee(emp_cpr, emp_name, emp_age, emp_email, emp_gender, emp_mobile, emp_salary, emp_address_id) values (123456789, 'Hasan', 12, 'hasan.lmra@gmail.com', 'M', 12345678, 400, 5);
+insert into public.employee(emp_cpr, emp_name, emp_age, emp_email, emp_gender, emp_mobile, emp_salary, emp_address_id) values (987654321, 'Fatima', 33, 'test@gmail.com', 'F', 987654321, 500, 6);
+insert into public.employee(emp_cpr, emp_name, emp_age, emp_email, emp_gender, emp_mobile, emp_salary, emp_address_id) values (123456789, 'Hasan', 12, 'hasan.lmra@gmail.com', 'M', 12345678, 400, 7);
+insert into public.employee(emp_cpr, emp_name, emp_age, emp_email, emp_gender, emp_mobile, emp_salary, emp_address_id) values (987654321, 'Fatima', 33, 'test@gmail.com', 'F', 987654321, 500, 8);
+insert into public.employee(emp_cpr, emp_name, emp_age, emp_email, emp_gender, emp_mobile, emp_salary, emp_address_id) values (123456789, 'Hasan', 12, 'hasan.lmra@gmail.com', 'M', 12345678, 400, 9);
+insert into public.employee(emp_cpr, emp_name, emp_age, emp_email, emp_gender, emp_mobile, emp_salary, emp_address_id) values (987654321, 'Fatima', 33, 'test@gmail.com', 'F', 987654321, 500, 10);
+
 create table public.certificate
 (
 	cert_id serial,
@@ -68,6 +94,27 @@ create table public.certificate
 	references public.employee (emp_id)
 );
 
+insert into public.certificate(cert_employee_id, cert_title, cert_year) values (1, 'Java', 2005);
+insert into public.certificate(cert_employee_id, cert_title, cert_year) values (1, 'Postgres', 2010);
+insert into public.certificate(cert_employee_id, cert_title, cert_year) values (2, 'Java EE', 2015);
+insert into public.certificate(cert_employee_id, cert_title, cert_year) values (2, 'Struts', 2020);
+insert into public.certificate(cert_employee_id, cert_title, cert_year) values (3, 'Java', 2005);
+insert into public.certificate(cert_employee_id, cert_title, cert_year) values (3, 'Postgres', 2010);
+insert into public.certificate(cert_employee_id, cert_title, cert_year) values (4, 'Java EE', 2015);
+insert into public.certificate(cert_employee_id, cert_title, cert_year) values (4, 'Struts', 2020);
+insert into public.certificate(cert_employee_id, cert_title, cert_year) values (5, 'Java', 2005);
+insert into public.certificate(cert_employee_id, cert_title, cert_year) values (5, 'Postgres', 2010);
+insert into public.certificate(cert_employee_id, cert_title, cert_year) values (6, 'Java EE', 2015);
+insert into public.certificate(cert_employee_id, cert_title, cert_year) values (6, 'Struts', 2020);
+insert into public.certificate(cert_employee_id, cert_title, cert_year) values (7, 'Java', 2005);
+insert into public.certificate(cert_employee_id, cert_title, cert_year) values (7, 'Postgres', 2010);
+insert into public.certificate(cert_employee_id, cert_title, cert_year) values (8, 'Java EE', 2015);
+insert into public.certificate(cert_employee_id, cert_title, cert_year) values (8, 'Struts', 2020);
+insert into public.certificate(cert_employee_id, cert_title, cert_year) values (9, 'Java', 2005);
+insert into public.certificate(cert_employee_id, cert_title, cert_year) values (9, 'Postgres', 2010);
+insert into public.certificate(cert_employee_id, cert_title, cert_year) values (10, 'Java EE', 2015);
+insert into public.certificate(cert_employee_id, cert_title, cert_year) values (10, 'Struts', 2020);
+
 create table public.manager
 (
 	mngr_id integer,
@@ -81,6 +128,17 @@ create table public.manager
 	constraint fk_mngr_id foreign key (mngr_id)
 	references public.employee (emp_id)
 );
+
+insert into public.manager(mngr_id, mngr_degree, mngr_allowance) values(1, 2, 300);
+insert into public.manager(mngr_id, mngr_degree, mngr_allowance) values(2, 3, 600);
+insert into public.manager(mngr_id, mngr_degree, mngr_allowance) values(3, 2, 300);
+insert into public.manager(mngr_id, mngr_degree, mngr_allowance) values(4, 3, 600);
+insert into public.manager(mngr_id, mngr_degree, mngr_allowance) values(5, 2, 300);
+insert into public.manager(mngr_id, mngr_degree, mngr_allowance) values(6, 3, 600);
+insert into public.manager(mngr_id, mngr_degree, mngr_allowance) values(7, 2, 300);
+insert into public.manager(mngr_id, mngr_degree, mngr_allowance) values(8, 3, 600);
+insert into public.manager(mngr_id, mngr_degree, mngr_allowance) values(9, 2, 300);
+insert into public.manager(mngr_id, mngr_degree, mngr_allowance) values(10, 3, 600);
 
 create table public.chief_executive_officer
 (
